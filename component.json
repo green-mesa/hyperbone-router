@@ -2,7 +2,7 @@
   "name": "hyperbone-router",
   "repo": "green-mesa/hyperbone-router",
   "description": "Express style routing for Hyperbone applications",
-  "version": "0.2.0",
+  "version": "0.2.2",
   "keywords": [],
   "dependencies": {
     "green-mesa/hashchange": "0.1.0",

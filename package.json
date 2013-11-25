@@ -1,6 +1,6 @@
 {
   "name": "hyperbone-router",
-  "version": "0.2.0",
+  "version": "0.2.2",
   "description": "Express sinatra style hashbang routing for Hyperbone",
   "main": "index.js",
   "scripts": {

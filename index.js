@@ -78,8 +78,8 @@ Router.prototype = {
 				route.on(event, fn);
 				return ctrl;
 			},
-			route : function(path){
-				return self.route(path);
+			route : function(path, model){
+				return self.route(path, model);
 			},
 			listen : function(){
 				self.listen();
