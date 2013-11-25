@@ -10,7 +10,7 @@ However, right now, we need a router that supports express style routes **and** 
 - Hashbang based because the particular usecase we have for this module requires this
 - Express/Sinatra style route syntax `/blah/:someparam/:someotherparam` etc
 - Hyperbone event based. `on('activate', fn)`
-- Activate and Deactivate events to subscribe to.
+- Some handy conventions for Hyperbone models
 
 ## Installation
 
@@ -94,7 +94,6 @@ The `if="active"` means that if product.active is true then the product section 
 Now we need to do a little more coding to set up our logic around handling various routes. This is *not* our business logic - we just want to make sure the right section is displayed depending on the route. 
 
 We don't care here about anything that happens after we've loaded data from a server, or what happens while we're on a particular route.
-
 ```js
 var app = new Router();
 
@@ -147,7 +146,27 @@ app
 		});
 // finally we want the application to start listening for hashchange (History API support may come later)
 app.listen();
+```
 
+Because marking a route `active = true` and `active = false` is always going to be necessary, Hyperbone Router can do this for you. If you pass a model when defining the route, it will automatically add an activate and deactivate handler that toggles 'active' on and off. 
+
+```js
+app
+	.route('/product/:id', appModel.get('product'))
+		.on('activate', function( ctx, uri ){
+			var product = appModel.get('product');
+			product.url( uri );
+			product.set('id', ctx.id);
+			product.fetch();
+		})
+	.route('/resource/:id', appModel.get('resource'))
+		.on('activate', function( ctx, uri ){
+			var resource = appModel.get('resource');
+			resource.url( uri );
+			product.set('id', ctx.id);
+			product.fetch();
+		})
+	.listen();
 ```
 
 ## API
@@ -160,11 +179,15 @@ Create a new Router instance
 
 Create a new route. 
 
-### Router#route.on
+### Router#route( path, model )
+
+Create a new route and use some default activate/deactivate handlers to toggle the 'active' attribute true and false. This can be used in your view to turn sections of the page on and off. 
+
+### Router#route( path [, model]).on( event, callback )
 
 A route is a Hyperbone event emitter. The two significant events are 'activate' and 'deactivate'. Activate handlers are passed a context object `ctx` which contains the paramters of the url as per PageJS. It is shared between all activate handlers for that route. You can register as many activate handlers as you like. 
 
-### Router#listen
+### Router#listen()
 
 Begin listening for routes
 

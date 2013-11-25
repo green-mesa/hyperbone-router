@@ -22,7 +22,7 @@ describe("suite", function(){
 			loc = window.location.href.replace(window.location.hash, '');
 			window.location.href = loc + "#!";
 
-		})
+		});
 
 		it('can define a route and it works', function( done ){
 
@@ -196,6 +196,44 @@ describe("suite", function(){
 				.listen();
 
 			require('hyperbone-router').navigateTo('/test/magic');
+
+		})
+
+	});
+
+	describe("Conventions", function(){
+
+		var Router = require('hyperbone-router').Router;
+
+		beforeEach(function(){
+
+			require('hyperbone-router').reset();
+
+			loc = window.location.href.replace(window.location.hash, '');
+			window.location.href = loc + "#!";
+
+		});	
+
+		it("Applies some default handlers to models", function( done ){
+
+			var router = new Router();
+
+			var model = new Model();
+
+			router.route('/test/:id', model)
+				.on('activate', function(){
+					expect(model.get('active')).to.equal(true);
+
+					router.navigateTo('/somewhere-else');
+				})
+				.on('deactivate', function(){
+					expect(model.get('active')).to.not.equal(false);
+					done();
+				})
+			
+			router.listen();
+
+			router.navigateTo('/test/magic');
 
 		})
 

@@ -53,7 +53,7 @@ module.exports.Router = Router = function(){
 };
 
 Router.prototype = {
-	route : function(path){
+	route : function(path, model){
 		var route = new Route(path),
 			ctrl,
 			self = this;
@@ -61,6 +61,17 @@ Router.prototype = {
 		_.extend(route, Events);
 
 		routes.push(route);
+
+		if(model){
+			route.on({
+				activate : function( ctx, uri ){
+					model.set('active', true);
+				},
+				deactivate : function(ctx, uri ){
+					model.set('active', false);
+				}
+			});
+		}
 
 		ctrl = {
 			on : function(event, fn){
@@ -71,11 +82,14 @@ Router.prototype = {
 				return self.route(path);
 			},
 			listen : function(){
-				hashchange.update(eventHandler);
-				return self;				
+				self.listen();
+				return self;
 			}
 		};
 		return ctrl;
+	},
+	listen : function(){
+		hashchange.update(eventHandler);
 	},
 	navigateTo : function( path, options ){
 		navigateTo(path, options);
