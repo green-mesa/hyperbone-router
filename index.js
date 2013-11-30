@@ -32,7 +32,7 @@ var redirect = function redirect( uri ){
 	routes.forEach(function(route){
 		if (ctx = route.match(uri)){
 			turnOn.push(function routeActivator(){
-				route.active = true;
+				route.active = uri;
 				route.trigger('activate', ctx, uri);
 			});
 		} else if(route.active) {
@@ -90,6 +90,7 @@ Router.prototype = {
 	},
 	listen : function(){
 		hashchange.update(eventHandler);
+		hashchange.update();
 	},
 	navigateTo : function( path, options ){
 		navigateTo(path, options);
