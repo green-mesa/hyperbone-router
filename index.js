@@ -66,6 +66,7 @@ Router.prototype = {
 			route.on({
 				activate : function( ctx, uri ){
 					model.set('active', true);
+					window.scrollTo(0,0);
 				},
 				deactivate : function(ctx, uri ){
 					model.set('active', false);

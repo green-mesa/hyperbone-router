@@ -1,10 +1,16 @@
 {
   "name": "hyperbone-router",
-  "version": "0.2.4",
+  "version": "0.2.6",
   "description": "Express sinatra style hashbang routing for Hyperbone",
   "main": "index.js",
   "scripts": {
     "test": "grunt install-build-test"
+  },
+  "dependencies" : {
+    "underscore" : "1.4.4",
+    "green-mesa-route" : "0.2.2",
+    "green-mesa-backbone-events" : "1.0.2",
+    "green-mesa-hashchange" : "0.1.4"
   },
   "repository": {
     "type": "git",
@@ -26,5 +32,10 @@
   },
   "author": "template",
   "license": "MIT",
-  "readmeFilename": "Readme.md"
+  "readmeFilename": "Readme.md",
+  "browser" : {
+    "route" : "green-mesa-route",
+    "backbone-events" : "green-mesa-backbone-events",
+    "hashchange" : "green-mesa-hashchange"
+  }
 }

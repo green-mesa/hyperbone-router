@@ -2,7 +2,7 @@
   "name": "hyperbone-router",
   "repo": "green-mesa/hyperbone-router",
   "description": "Express style routing for Hyperbone applications",
-  "version": "0.2.4",
+  "version": "0.2.6",
   "keywords": [],
   "dependencies": {
     "green-mesa/hashchange": "0.1.2",
@@ -14,5 +14,7 @@
   "scripts": [
     "index.js"
   ],
-  "remotes": []
+  "remotes": [
+    "https://raw.githubusercontent.com"
+  ]
 }

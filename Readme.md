@@ -14,6 +14,14 @@ However, right now, we need a router that supports express style routes **and** 
 
 ## Installation
 
+Browserify
+
+```sh
+$ npm install --save hyperbone-router
+```
+
+Component
+
 ```sh
 $ component install green-mesa/hyperbone-router
 ```
