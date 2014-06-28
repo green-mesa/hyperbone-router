@@ -1,3 +1,10 @@
+var chai = require('chai');
+var expect = chai.expect;
+var should = chai.should();
+
+var hyperboneRouter = require('../index.js');
+
+var Model = require('hyperbone-model').Model;
 
 describe("suite", function(){
 
@@ -5,7 +12,7 @@ describe("suite", function(){
 
 		it("has a working environment", function(){
 
-			should.exist(require('hyperbone-router'));
+			should.exist(hyperboneRouter);
 
 		});
 
@@ -13,11 +20,11 @@ describe("suite", function(){
 
 	describe("Registering routes", function(){
 
-		var Router = require('hyperbone-router').Router;
+		var Router = hyperboneRouter.Router;
 
 		beforeEach(function(){
 
-			require('hyperbone-router').reset();
+			hyperboneRouter.reset();
 
 			loc = window.location.href.replace(window.location.hash, '');
 			window.location.href = loc + "#!";
@@ -116,11 +123,11 @@ describe("suite", function(){
 	describe("Manually updating the current hash fragment", function(){
 
 
-		var Router = require('hyperbone-router').Router;
+		var Router = hyperboneRouter.Router;
 
 		beforeEach(function(){
 
-			require('hyperbone-router').reset();
+			hyperboneRouter.reset();
 
 			loc = window.location.href.replace(window.location.hash, '');
 			window.location.href = loc + "#!";
@@ -147,7 +154,7 @@ describe("suite", function(){
 				})
 				.listen();
 
-			require('hyperbone-router').navigateTo('/test/magic');
+			hyperboneRouter.navigateTo('/test/magic');
 
 		});
 
@@ -182,7 +189,7 @@ describe("suite", function(){
 
 					if(count === 1){
 
-						require('hyperbone-router').navigateTo('/test/magic', { trigger : true });
+						hyperboneRouter.navigateTo('/test/magic', { trigger : true });
 
 			
 					} else {
@@ -195,7 +202,7 @@ describe("suite", function(){
 				})
 				.listen();
 
-			require('hyperbone-router').navigateTo('/test/magic');
+			hyperboneRouter.navigateTo('/test/magic');
 
 		})
 
@@ -203,11 +210,11 @@ describe("suite", function(){
 
 	describe("Conventions", function(){
 
-		var Router = require('hyperbone-router').Router;
+		var Router = hyperboneRouter.Router;
 
 		beforeEach(function(){
 
-			require('hyperbone-router').reset();
+			hyperboneRouter.reset();
 
 			loc = window.location.href.replace(window.location.hash, '');
 			window.location.href = loc + "#!";

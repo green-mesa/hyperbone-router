@@ -1,10 +1,10 @@
 {
   "name": "hyperbone-router",
-  "version": "0.2.6",
+  "version": "0.2.8",
   "description": "Express sinatra style hashbang routing for Hyperbone",
   "main": "index.js",
   "scripts": {
-    "test": "grunt install-build-test"
+    "test": "grunt test"
   },
   "dependencies" : {
     "underscore" : "1.4.4",
@@ -20,15 +20,26 @@
     "grunt"
   ],
   "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-cafe-mocha": "~0.1.9",
+    "grunt": "~0.4.2",
+    "grunt-browserify" : "~1.3.0",
+    "grunt-mocha-test": "~0.11.0",
     "grunt-mocha-phantomjs": "~0.3.0",
     "grunt-contrib-jshint": "~0.6.4",
-    "grunt-shell": "~0.4.0",
     "grunt-contrib-watch": "~0.5.3",
-    "component": "~0.17.4",
-    "chai": "~1.8.0",
-    "mocha": "~1.13.0"
+    "chai": "~1.9.0",
+    "mocha": "~1.17.1",
+    "hyperbone-model" : "0.5.10"
+  },
+  "testling" : {
+    "harness" : "mocha-bdd",
+    "files" : "test/test.js",
+    "browsers" : [
+      "ie8", "ie9", "ie10", "ie11",
+      "ff/latest", "ff/nightly",
+      "chrome/latest", "chrome/canary",
+      "opera/latest", "opera/next",
+      "safari/latest"
+    ]
   },
   "author": "template",
   "license": "MIT",

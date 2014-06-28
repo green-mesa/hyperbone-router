@@ -1,5 +1,9 @@
 # Hyperbone Router
 
+## This is no longer being maintained. 
+
+It has been replaced by [HalogenJS](https://github.com/halogenjs/router) 
+
 [![Build Status](https://travis-ci.org/green-mesa/hyperbone-router.png?branch=master)](https://travis-ci.org/green-mesa/hyperbone-router)
 
 Of all the parts of Hyperbone, this is probably the most peculiar and least necessary: Hyperbone is made of individual modules and just about any router will do in place of this.
@@ -20,12 +24,12 @@ Browserify
 $ npm install --save hyperbone-router
 ```
 
-Component
+## Tests
 
-```sh
-$ component install green-mesa/hyperbone-router
+Clone the repo, do an npm install, install grunt-cli if you don't already have it then
+```js
+$ npm test
 ```
-
 
 ## Example Usage
 
@@ -204,19 +208,7 @@ Begin listening for routes
 
 Navigate to a different route. If you want to make sure that the route handlers fire even if the route hasn't changed, use `{trigger : true}` as per Backbone as `options`.
 
-## Testing
 
-Install testing tools. You probably need PhantomJS on your path.
-
-```back
-  $ npm install && npm install -g grunt-cli
-```
-
-Run the tests:
-
-```bash
-  $ grunt test
-```
 
 ## License
 

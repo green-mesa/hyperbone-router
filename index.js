@@ -12,8 +12,8 @@ var eventHandler = function( newHash ){
 
 module.exports.navigateTo = navigateTo = function navigateTo( uri, options ){
 
-	if(uri.substr(0,1)==="#") uri = uri.substr(1);
-	if(uri.substr(0,1)!=="!") uri = "!" + uri; 
+	if(uri.substr(0,1)==='#') uri = uri.substr(1);
+	if(uri.substr(0,1)!=='!') uri = '!' + uri;
 	
 	hashchange.updateHash(uri);
 	if(options && options.trigger){
@@ -23,8 +23,8 @@ module.exports.navigateTo = navigateTo = function navigateTo( uri, options ){
 
 // when the hash changes...
 var redirect = function redirect( uri ){
-	if(uri.substr(0,1)==="#") uri = uri.substr(1);
-	if(uri.substr(0,1)==="!") uri = uri.substr(1);
+	if(uri.substr(0,1)==='#') uri = uri.substr(1);
+	if(uri.substr(0,1)==='!') uri = uri.substr(1);
 	// iterate twice..
 	var turnOn = [];
 	var turnOff = [];
@@ -109,4 +109,4 @@ module.exports.reset = function(){
 	});
 	routes = [];
 
-}
+};
