@@ -205,8 +205,25 @@ describe("suite", function(){
 			hyperboneRouter.navigateTo('/test/magic');
 
 		})
+		/*
+		it('will use a default route if nothing matches', function(done){
 
+			var router = new Router(), loc;
+
+			router.defaultRoute().on('activate', function(ctx, path){
+
+				expect(ctx.id).to.equal('/default');
+				done();
+
+			}).listen();
+
+			loc = window.location.href.replace(window.location.hash, '');
+			window.location.href = loc + "#!/test/magic";
+		});
+*/
+	
 	});
+
 
 	describe("Conventions", function(){
 
@@ -230,10 +247,9 @@ describe("suite", function(){
 			router.route('/test/:id', model)
 				.on('activate', function(){
 					expect(model.get('active')).to.equal(true);
-
-					router.navigateTo('/somewhere-else');
+					hyperboneRouter.navigateTo('/somewhere-else');
 				})
-				.on('deactivate', function(){
+			  .on('deactivate', function(){
 					expect(model.get('active')).to.not.equal(false);
 					done();
 				})

@@ -3,6 +3,7 @@ var Route = require('route');
 var hashchange = require('hashchange');
 var Events = require('backbone-events').Events;
 var routes = [];
+var defaultRoute = false;
 var Router;
 var navigateTo;
 
@@ -42,8 +43,15 @@ var redirect = function redirect( uri ){
 			});
 		}
 	});
+	// if no routes matched..
+	if (turnOn.length === 0 && defaultRoute){
+		console.log('no matches');
+		defaultRoute.active = uri;
+		defaultRoute.trigger('activate', { id : '/default'}, uri);
+	}
 	turnOff.forEach(function(fn){fn();});
 	turnOn.forEach(function(fn){fn();});
+	
 };
 
 module.exports.Router = Router = function(){
@@ -82,6 +90,48 @@ Router.prototype = {
 			route : function(path, model){
 				return self.route(path, model);
 			},
+			defaultRoute : function (model){
+				return self.route(model);
+			},
+			listen : function(){
+				self.listen();
+				return self;
+			}
+		};
+		return ctrl;
+	},
+	defaultRoute : function (model){
+		// sorry, nasty cut-and-paste job this... 
+		defaultRoute = {};
+
+		var	ctrl,
+			self = this;
+
+		_.extend(defaultRoute, Events);
+
+		if(model){
+			defaultRoute.on({
+				activate : function( ctx, uri ){
+					model.set('active', true);
+					window.scrollTo(0,0);
+				},
+				deactivate : function(ctx, uri ){
+					model.set('active', false);
+				}
+			});
+		}
+
+		ctrl = {
+			on : function(event, fn){
+				defaultRoute.on(event, fn);
+				return ctrl;
+			},
+			route : function(path, model){
+				return self.route(path, model);
+			},
+			defaultRoute : function (model){
+				return self.route(model);
+			},
 			listen : function(){
 				self.listen();
 				return self;
@@ -108,5 +158,6 @@ module.exports.reset = function(){
 		route.off();
 	});
 	routes = [];
+	defaultRoute = false;
 
 };
